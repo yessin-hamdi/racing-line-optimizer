@@ -105,9 +105,11 @@ def plot_result(x, y, left, right, racing_x, racing_y, track_name, save_path):
     plt.show()
 
 
+import sys
+
 def main():
-    csv_path = "../racing-database/racetrack-database-master/racetrack-database-master/tracks/Monza.csv"
-    track_name = "Monza"
+    track_name = sys.argv[1] if len(sys.argv) > 1 else "Monza"
+    csv_path = f"../racing-database/racetrack-database-master/racetrack-database-master/tracks/{track_name}.csv"
 
     track = load_track(csv_path)
     x = track["x_m"].values
