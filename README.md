@@ -1,5 +1,6 @@
-# racing-line-optimizer
+
 # Racing Line Optimizer
+
 
 A minimum-curvature trajectory optimizer that computes an optimal racing
 line through a racetrack, given only the track's centerline geometry and
