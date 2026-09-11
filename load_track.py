@@ -208,7 +208,7 @@ def main():
     racing_y = y + alpha_opt * n_y
 
     plot_result(x, y, left, right, racing_x, racing_y, track_name,
-                f"{track_name.lower()}_racing_line.png")
+                f"results/{track_name.lower()}_racing_line.png")
 
     v_max, R = compute_speed_profile(racing_x, racing_y)
     v_profile = apply_acceleration_limits(v_max, racing_x, racing_y)
@@ -235,7 +235,7 @@ def main():
     plt.xlabel("Point index (along track)")
     plt.ylabel("Speed (km/h)")
     plt.legend()
-    plt.savefig(f"{track_name.lower()}_speed_profile.png")
+    plt.savefig(f"results/{track_name.lower()}_racing_line.png")
     plt.show()
 
 if __name__ == "__main__":
