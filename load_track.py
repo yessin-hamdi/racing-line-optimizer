@@ -108,10 +108,7 @@ def compute_speed_profile(x, y, a_y_max=15.0):
     """
     curvature = compute_curvature(x, y)
 
-    # Avoid division by zero on perfectly straight sections
-    # (curvature exactly 0 would make R infinite).
-    # np.abs() since curvature sign indicates turn direction (left/right),
-    # but radius itself is always a positive distance.
+   
     curvature_safe = np.maximum(np.abs(curvature), 1e-6)
 
     R = 1 / curvature_safe
@@ -126,7 +123,7 @@ def apply_acceleration_limits(v_max, x, y, a_max=10.0, a_brake=25.0, v_top_speed
     ds = np.sqrt((x_next - x)**2 + (y_next - y)**2)
 
     # Repeat the forward-backward sweep several times so the seam
-    # between the last point and point 0 (the closed loop) converges
+    # between the last point and point 0 converges
     # to a consistent value, instead of being treated as a hard start.
     for _ in range(n_laps):
         for i in range(n):
