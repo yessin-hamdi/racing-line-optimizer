@@ -69,20 +69,36 @@ Track geometry is sourced from TUM's open-source
 [racetrack-database](https://github.com/TUMFTM/racetrack-database)
 (F1/DTM circuit centerlines and widths).
 
-## Requirements
+## Setup
 
-- Python 3
-- numpy, scipy, pandas, matplotlib
+```bash
+git clone https://github.com/yessin-hamdi/racing-line-optimizer.git
+cd racing-line-optimizer
+
+# Track data (TUM racetrack-database), downloaded into data/
+git clone https://github.com/TUMFTM/racetrack-database data/racetrack-database
+
+# Optional but recommended: a virtual environment
+python -m venv venv
+source venv/bin/activate        # Linux/macOS
+# source venv/Scripts/activate  # Windows (Git Bash)
+
+pip install -r requirements.txt
+```
 
 ## Usage
 
 ```bash
-python load_track.py [TrackName]
+python load_track.py              # Monza (default)
+python load_track.py Spa          # any track in the data folder
+python load_track.py --help       # all options
 ```
 
-Defaults to Monza if no track is given. Computes the minimum-curvature
-racing line, estimates its speed profile and lap time, compares it
-against the centerline baseline, and saves plots as PNGs.
+The script computes the minimum-curvature racing line, estimates its
+speed profile and lap time, compares it with the centerline, and saves
+two plots per track in `results/`: the racing line and the speed profile.
+If the track name is wrong, it lists the available tracks.
+Use `--data-dir` if your track files are in another folder.
 
 ## Status
 

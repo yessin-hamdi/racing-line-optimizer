@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.sparse import diags
 from scipy.optimize import minimize
+import argparse
+from pathlib import Path
 
 
 def load_track(csv_path):
@@ -173,12 +175,34 @@ def compute_metrics(x, y, v_profile):
     }
 
 
-import sys
 
 
 def main():
-    track_name = sys.argv[1] if len(sys.argv) > 1 else "Monza"
-    csv_path = f"../racing-database/racetrack-database-master/racetrack-database-master/tracks/{track_name}.csv"
+    parser = argparse.ArgumentParser(
+        description="Compute a minimum-curvature racing line and estimate lap time for a track."
+    )
+    parser.add_argument(
+        "track", nargs="?", default="Monza",
+        help="track name, as in the CSV file name (default: Monza)"
+    )
+    parser.add_argument(
+        "--data-dir", default="data/racetrack-database/tracks",
+        help="folder containing the TUM track CSV files"
+    )
+    args = parser.parse_args()
+
+    track_name = args.track
+    csv_path = Path(args.data_dir) / f"{track_name}.csv"
+
+    if not csv_path.exists():
+        print(f"Track file not found: {csv_path}")
+        available = sorted(p.stem for p in Path(args.data_dir).glob("*.csv"))
+        if available:
+            print("Available tracks: " + ", ".join(available))
+        else:
+            print("No track files found. Did you clone the TUM racetrack-database into data/?")
+        return
+
 
     track = load_track(csv_path)
     x = track["x_m"].values
@@ -204,6 +228,7 @@ def main():
     racing_x = x + alpha_opt * n_x
     racing_y = y + alpha_opt * n_y
 
+    Path("results").mkdir(exist_ok=True)
     plot_result(x, y, left, right, racing_x, racing_y, track_name,
                 f"results/{track_name.lower()}_racing_line.png")
 
