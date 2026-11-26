@@ -4,7 +4,7 @@ A minimum-curvature trajectory optimizer that computes an optimal racing
 line through a racetrack and estimates lap time, given only the track's
 centerline geometry and width — built as a personal project to explore
 optimization methods applied to autonomous/motorsport systems.
-
+![Minimum-curvature racing line at Monza](results/monza_racing_line.png)
 ## What it does
 
 Given a track's centerline coordinates and left/right width at each point
@@ -62,6 +62,7 @@ technical corner sequences (Silverstone, Spa) benefit more from the
 optimization than tracks dominated by straights (Monza) — consistent
 with the fact that minimum-curvature optimization has more room to help
 wherever there's more curvature to smooth out.
+![Speed profile at Monza](results/monza_speed_profile.png)
 
 ## Data
 
