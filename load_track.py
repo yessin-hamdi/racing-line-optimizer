@@ -232,7 +232,7 @@ def main():
     plt.xlabel("Point index (along track)")
     plt.ylabel("Speed (km/h)")
     plt.legend()
-    plt.savefig(f"results/{track_name.lower()}_racing_line.png")
+    plt.savefig(f"results/{track_name.lower()}_speed_profile.png")
     plt.show()
 
 if __name__ == "__main__":
